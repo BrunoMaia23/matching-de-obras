@@ -7,7 +7,7 @@ uma obra do catálogo. O título vem sem acento ou com "(Ao Vivo)", o autor vem 
 Lima", às vezes falta um autor, às vezes a obra nem existe no catálogo. Este repositório é a lógica de
 casamento que montei para um intercâmbio desses no trabalho, reescrita com dados fictícios.
 
-*In English: matching a partner's spreadsheet of music works against an internal catalog. Text
+*Short version in English: matching a partner's spreadsheet of music works against an internal catalog. Text
 normalization, an inverted index for candidates (with typo correction), explainable scores, and three
 outcomes: matched, needs review, or pending. A synthetic answer key measures every change. Synthetic data.*
 
@@ -30,7 +30,7 @@ outcomes: matched, needs review, or pending. A synthetic answer key measures eve
 6. **Saída** (`saida.py`). Uma planilha com as abas Casadas, Duvidas (com os três candidatos e as notas),
    Pendentes e Resumo, que é o que a área de negócio revisa.
 
-## A demo
+## Para ver funcionando
 
 ```bash
 python -m venv .venv && source .venv/bin/activate    # Windows: .venv\Scripts\activate
@@ -68,16 +68,10 @@ e o gabarito mostrou dois problemas de verdade:
 
 Os dois casos viraram teste.
 
-## No projeto real
+## O que muda no trabalho
 
 - O catálogo é muito maior, então o casamento roda em Spark sobre os dados do catálogo no Hadoop. A
   lógica de normalização, candidatos e nota é a mesma.
 - A staging fica no banco, com o hash por linha, e cada envio do parceiro tem o seu código de controle.
 - Além do casamento, o retorno ao parceiro leva informações calculadas por regras de negócio
   específicas do contrato, que ficaram fora daqui.
-
-## Testes
-
-`pytest` cobre normalização, nota de nomes e títulos, decisão, índice de candidatos, os dois formatos
-de planilha, a staging sem duplicar, e um ponta a ponta que falha se alguma obra nova casar sozinha ou
-se uma obra existente ficar pendente.
